@@ -14,8 +14,8 @@ bool hasLost = false;
 
 std::vector<std::string> loadDictionary(std::string filename);
 void displayBoard();
-void handleInput();
-void update(char c);
+virtual char handleInput();
+virtual void update(char c);
 void play();
 bool isCorrect();
 std::vector<char> lettersGuessed;

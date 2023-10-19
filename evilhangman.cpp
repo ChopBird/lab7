@@ -29,8 +29,9 @@ void evilhangman::play(){
    
     while(!hasLost){
         std::cout<<"words left: "<< possibleWords.size() <<std::endl;
-        handleInput();
-        if (word == currBoard) break;
+        std::cout << "tries left: " << numGuesses << "\n";
+        update(handleInput());
+        if (possibleWords.size() == 1 && possibleWords[0] == currBoard) break;
     }
     if(hasLost) 
     std::cout << "you lose :(" <<std::endl;
@@ -72,6 +73,7 @@ void evilhangman::update(char c){
     int biggestSize = 0;
     if (families.empty()){
         numGuesses--;
+        std::cout <<"No family :( \n";
         if (numGuesses==0) hasLost = true;
         displayBoard();
         return;
@@ -82,6 +84,8 @@ void evilhangman::update(char c){
             biggestSize = pair.second.size();
         }
     }
+    possibleWords = families.find(biggestKey)->second;
+    
     for (int i = 0; i < wordlength;i++){
     
     if (possibleWords[0][i] == c){
@@ -89,7 +93,7 @@ void evilhangman::update(char c){
     } 
     
 }
-    std::cout << families.find(biggestKey)->second[0];
+    //std::cout << families.find(biggestKey)->second[0];
     possibleWords = families.find(biggestKey)->second;
     displayBoard();
 

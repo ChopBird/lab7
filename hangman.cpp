@@ -15,16 +15,17 @@ Hangman::Hangman(){}
 void Hangman::displayBoard(){
     std::cout<< currBoard << std::endl;
 }
-void Hangman::handleInput(){
+char Hangman::handleInput(){
 char input = 0;
 std::cout << "enter character" << std::endl;
 std::cin >> input;
 
-update(input);
+return input;
 }
 
 void Hangman::update(char c){
 bool correct = false;
+std::cout << "why are you here?"<<std::endl;
 for (int i = 0; i < wordlength;i++){
     if (word[i] == c){
         currBoard[i] = c;
@@ -63,7 +64,7 @@ void Hangman::play(){
     currBoard = std::string(word.length(),'_');
     std::cout<<"word is: "<< word <<std::endl;
     while(!hasLost){
-        handleInput();
+        update(handleInput());
         if (word == currBoard) break;
     }
     std::cout<<"YOU WIN\n";
